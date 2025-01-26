@@ -18,3 +18,5 @@ Pourquoi ça ne fonctionne pas directement :
 Pandas fonctionne très bien avec les fichiers .xlsx (formats Excel standard), mais quand vous utilisez openpyxl avec des fichiers .xlsm, vous travaillez directement avec le fichier au niveau des feuilles Excel, ce qui nécessite d'interagir avec la structure des cellules et des feuilles.
 
 openpyxl permet de travailler avec les fichiers .xlsm (et d'autres types de fichiers Excel), mais pour obtenir la dernière ligne ou colonne remplie, il faut traiter les données au niveau de la feuille de calcul de manière spécifique.
+
+Ne pas intérompre le programme avant d'avoir enregistré => Fichier endommagé irrécupérable
