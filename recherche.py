@@ -4,7 +4,7 @@ import time
 
 
 
-path_excel = r"C:\Users\damie\Documents\GitHub\MON-3.1---Python-in-companies\Tests 5.xlsm"
+path_excel = r"C:\Users\damie\Documents\GitHub\MON-3.1---Python-in-companies\Tests 6.xlsm"
 nom_donnee = "Données"
 nom_resultat = "Sommaire"
 
@@ -38,7 +38,7 @@ fin_ouverture = time.time()
 
 print("Temps d'ouverture' : ",fin_ouverture-debut_ouverture)
 
-for k in range(1,3) :
+for k in range(1,8) :
     print("__________________________________________________\nCas n°",k)
 
     compteur = 0

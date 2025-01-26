@@ -1,0 +1,88 @@
+import openpyxl
+import time
+
+path_excel = r"C:\Users\damie\Documents\GitHub\MON-3.1---Python-in-companies\Tests 7.xlsx"  # Changez le fichier .xlsm en .xlsx
+nom_donnee = "Données"
+nom_resultat = "Sommaire"
+
+def derniere_ligne_remplie(sheet):
+    """
+    Retourne le numéro de la dernière ligne remplie dans la feuille.
+    """
+    derniere_ligne = 0
+    for row in sheet.iter_rows(min_row=1, max_row=sheet.max_row):
+        for cell in row:
+            if cell.value is not None:
+                derniere_ligne = max(derniere_ligne, cell.row)
+    return derniere_ligne
+
+def derniere_colonne_remplie(sheet):
+    """
+    Retourne le numéro de la dernière colonne remplie dans la feuille.
+    """
+    derniere_colonne = 0
+    for col in sheet.iter_cols(min_col=1, max_col=sheet.max_column):
+        for cell in col:
+            if cell.value is not None:
+                derniere_colonne = max(derniere_colonne, cell.column)
+    return derniere_colonne
+
+debut_ouverture = time.time()
+print("Ouverture")
+# Ouverture de la feuille
+fichier = openpyxl.load_workbook(path_excel)  # Chargement du fichier .xlsx sans VBA
+fin_ouverture = time.time()
+
+print("Temps d'ouverture : ", fin_ouverture - debut_ouverture)
+
+for k in range(1, 8):
+    print("__________________________________________________\nCas n°", k)
+
+    compteur = 0
+    somme = 0
+
+    nom_donne_plus = nom_donnee + " " + str(k)
+    feuille = fichier[nom_donne_plus]
+    data = fichier[nom_resultat]
+
+    print("Dimensions")
+
+    temps_1 = time.time()
+
+    derniere_ligne = derniere_ligne_remplie(feuille)
+    derniere_colonne = derniere_colonne_remplie(feuille)
+
+    temps_2 = time.time()
+
+    print("Parcours")
+
+    # Complétion des données
+    compteur = 0
+    for i in range(1, derniere_ligne + 1):  # Parcours des lignes
+        for j in range(1, derniere_colonne + 1):  # Parcours des colonnes
+            if type(feuille.cell(i, j).value) != str:  # Si la cellule n'est pas une chaîne
+                compteur += 1
+                somme += feuille.cell(i, j).value
+
+    temps_3 = time.time()
+
+    print("Reporting")
+
+    data.cell(11, 2 + k).value = compteur
+    data.cell(12, 2 + k).value = somme
+    data.cell(13, 2 + k).value = temps_2 - temps_1
+    data.cell(14, 2 + k).value = temps_3 - temps_2
+    data.cell(15, 2 + k).value = temps_3 - temps_1
+
+    # Sauvegarde des modifications
+
+debut_fermeture = time.time()
+print("Lancement fermeture")
+
+fichier.save(path_excel)  # Sauvegarde le fichier Excel modifié
+
+fin_fermeture = time.time()
+
+print("Temps de fermeture : ", fin_fermeture - debut_fermeture)
+
+print("FIN")
