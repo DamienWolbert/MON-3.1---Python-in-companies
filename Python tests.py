@@ -1,14 +1,14 @@
 import win32com.client
 
 # Chemin vers ton fichier Excel"
-fichier_excel = "C:/Users/damie/Documents/GitHub/MON-3.1---Python-in-companies/Tests.xlsm"
+fichier_excel = "C:/Users/damie/Documents/GitHub/MON-3.1---Python-in-companies/Tests 4.xlsm"
 
 
 # Nom de la macro (doit inclure le nom du module si nécessaire, ex : Module1.MaMacro)
 nom_macro = "ID"
 
 # Ouvrir Excel via COM
-excel = win32com.client.Dispatch("Excel.Application")
+excel = win32com.client.Dispatch("Excel.Application",keep_vba=True)
 excel.Visible = True  # Mettre sur True si tu veux voir Excel se lancer
 
 try:
@@ -27,6 +27,4 @@ finally:
     excel.Quit()
 
 print("Macro exécutée avec succès.")
-
-############################################################################################
 
