@@ -38,7 +38,7 @@ fin_ouverture = time.time()
 
 print("Temps d'ouverture' : ",fin_ouverture-debut_ouverture)
 
-for k in range(1,8) :
+for k in range(7,8) :
     print("__________________________________________________\nCas n°",k)
 
     compteur = 0
